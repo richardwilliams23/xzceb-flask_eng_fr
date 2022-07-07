@@ -8,12 +8,13 @@ from ibm_watson import LanguageTranslatorV3
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 
 from dotenv import load_dotenv
-load_dotenv()
-url = os.environ['{url}']
-apikey = os.environ['{apikey}']
-version = os.environ['{version}']
+load_dotenv()  # take environment variables from .env.
 
-# Add code to create an instance of the IBM Watson Language translator
+url = os.environ['URL']
+apikey = os.environ['APIKEY']
+version = os.environ['VERSION']
+
+# Create an instance of the IBM Watson Language translator
 authenticator = IAMAuthenticator( apikey )
 language_translator = LanguageTranslatorV3(
     version=version,
@@ -25,6 +26,7 @@ language_translator.set_service_url( url )
 
 def english_to_french(english_text):
     """ Function to translate English text to French """
+    print("@@@ english_to_french: english_text is " + english_text)
     # Retrieve the Detailed Response object.
     translation = language_translator.translate(
         text=english_text,
@@ -35,6 +37,7 @@ def english_to_french(english_text):
 
 
 def french_to_english(french_text):
+    print("@@@ french_to_english: french_text is " + french_text)
     """ Function to translate French text to English """
     # Retrieve the Detailed Response object.
     translation_respose = language_translator.translate(
